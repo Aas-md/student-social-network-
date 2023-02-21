@@ -8,7 +8,7 @@ This project was build during my winter vocations 2022! we have planed to use se
 <p float="left">
 <table><tr><td>
   
-   <img src="https://user-images.githubusercontent.com/112398359/220347709-20f0c9bf-5a1e-4af5-bf95-6068048f79ab.jpg "  width="300" height="500" />
+   <img src="https://user-images.githubusercontent.com/112398359/220347709-20f0c9bf-5a1e-4af5-bf95-6068048f79ab.jpg "  width="240" height="400" />
   
    <img src="https://user-images.githubusercontent.com/112398359/220341402-6040db80-c172-453c-88dc-0b2fd1a8eaf8.jpg "  width="300" height="500" />
   

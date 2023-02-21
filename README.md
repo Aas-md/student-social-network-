@@ -10,7 +10,7 @@ This project was build during my winter vocations 2022! we have planed to use se
   
    <img src="https://user-images.githubusercontent.com/112398359/220347709-20f0c9bf-5a1e-4af5-bf95-6068048f79ab.jpg "  width="240" height="400" />
   
-   <img src="https://user-images.githubusercontent.com/112398359/220341402-6040db80-c172-453c-88dc-0b2fd1a8eaf8.jpg "  width="300" height="500" />
+   <img src="https://user-images.githubusercontent.com/112398359/220341402-6040db80-c172-453c-88dc-0b2fd1a8eaf8.jpg "  width="240" height="400" />
   
   </td></tr></table> 
 
@@ -21,9 +21,9 @@ This project was build during my winter vocations 2022! we have planed to use se
 <p float="left">
 <table><tr><td>
   
-   <img src="https://user-images.githubusercontent.com/112398359/220354196-7795fc2c-edf2-4f54-90a5-2b442f6b0ab2.jpg" width="300" height="500" />
+   <img src="https://user-images.githubusercontent.com/112398359/220354196-7795fc2c-edf2-4f54-90a5-2b442f6b0ab2.jpg" width="240" height="400" />
   
-   <img src="https://user-images.githubusercontent.com/112398359/220355061-ed178ee5-239e-4e75-8456-59440389f652.jpg"  width="300" height="500" />
+   <img src="https://user-images.githubusercontent.com/112398359/220355061-ed178ee5-239e-4e75-8456-59440389f652.jpg"  width="240" height="400" />
   
   </td></tr></table> 
 
@@ -33,7 +33,7 @@ This project was build during my winter vocations 2022! we have planed to use se
 <table><tr><td>
   
 <img src = "https://user-images.githubusercontent.com/112398359/220355383-c6d26d44-4d36-418d-84ef-6f068dd60273.jpg"
-  width="300" height="500" />
+  width="240" height="400" />
     </td></tr></table> 
 
 </p>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1020378472322",
+    "project_id": "pdfupload2-badb9",
+    "storage_bucket": "pdfupload2-badb9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020378472322:android:b74b83917b3384c529b99b",
+        "android_client_info": {
+          "package_name": "com.example.pdfupload2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1020378472322-jagpvb4f82ejqv5a81a4jkn560nhnmup.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pdfupload2",
+            "certificate_hash": "f5ffa79eb05925827c5a48e85e4a51fcf93d9e73"
+          }
+        },
+        {
+          "client_id": "1020378472322-7l925vm3g9j7eufiglogvjtheock9pol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8XFwAW7ayMz0JeEh-5W6WsFtntCGH3EM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1020378472322-7l925vm3g9j7eufiglogvjtheock9pol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

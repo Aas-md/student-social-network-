@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="visible"/>
+
+    <ProgressBar
+        android:id="@+id/i_progress_bar"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintLeft_toLeftOf="@+id/profile_image"
+        app:layout_constraintRight_toRightOf="@id/profile_image"
+        app:layout_constraintTop_toTopOf="@id/profile_image"
+        app:layout_constraintBottom_toBottomOf="@id/profile_image"/>
+
+
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/select_dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/profile_image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="102dp"
+        android:src="@drawable/ic_baseline_camera_alt_24"
+        android:background="@drawable/teal_200_circle_shape"
+        android:padding="10dp"
+        android:layout_marginLeft="107dp"/>
+
+        <ImageView
+            android:id="@+id/name_icon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_contact"/>
+
+    <TextView
+        android:id="@+id/name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toRightOf="@+id/name_icon"
+        app:layout_constraintTop_toBottomOf="@id/profile_image"
+        android:layout_marginTop="22dp"
+        android:layout_marginLeft="20dp"/>
+
+        <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:text="Name"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/name_icon"
+        app:layout_constraintTop_toBottomOf="@+id/name_text"/>
+
+    <ImageView
+        android:id="@+id/about_icon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_icon"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/ic_baseline_info_24"/>
+
+    <TextView
+        android:id="@+id/about_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toRightOf="@+id/name_icon"
+        app:layout_constraintTop_toBottomOf="@id/profile_name"
+        android:layout_marginTop="23dp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/profile_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Five star code at Codechef"
+        android:layout_marginTop="4dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/name_icon"
+        app:layout_constraintTop_toBottomOf="@+id/about_text"/>
+
+
+    <ImageView
+        android:id="@+id/cource_icon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_about"
+        android:layout_marginTop="23dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/ic_app_icon_scholar_24"
+        app:tint="@color/black"/>
+
+
+    <TextView
+        android:id="@+id/cource_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cource/branch"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toRightOf="@+id/cource_icon"
+        app:layout_constraintTop_toBottomOf="@id/profile_about"
+        android:layout_marginTop="23dp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/profile_cource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:text="B.Tech(CSE)-4th year"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/cource_icon"
+        app:layout_constraintTop_toBottomOf="@+id/cource_text"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_profile_btn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit profile"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:strokeColor="@color/black_overlay"
+        app:strokeWidth="1dp"
+        app:cornerRadius="45dp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/profile_cource"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

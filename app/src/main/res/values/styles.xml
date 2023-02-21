@@ -1,0 +1,23 @@
+<resources>
+
+    <style name="Widget.Theme.PdfUpload2.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="Widget.Theme.PdfUpload2.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+    
+    <style name="my_button" parent="">
+
+        <item name="android:color">@color/teal_200</item>
+    </style>
+
+    <style name="progress_dialog_theme" parent="">
+
+        <item name="colorAccent">@color/whatsapp_green</item> <!-- Whatever color you want-->
+    </style>
+
+    
+</resources>

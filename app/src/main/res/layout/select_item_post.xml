@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="200dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Text"
+        app:layout_constraintTop_toBottomOf="@id/text_btn"
+        app:layout_constraintLeft_toRightOf="@id/gallery_btn"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Document"
+       app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pdf_btn"
+        android:layout_marginLeft="42dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       app:layout_constraintLeft_toRightOf="@id/pdf_btn"
+        app:layout_constraintTop_toBottomOf="@id/gallery_btn"
+        android:layout_marginTop="10dp"
+        android:text="Gallery"
+        android:layout_marginLeft="51dp"
+        android:textSize="16sp"/>
+
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/pdf_btn"
+       app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="70dp"
+        android:background="@color/red"
+        android:src="@drawable/ic_pdf_24" />
+
+    <ImageView
+        android:id="@+id/gallery_btn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="70dp"
+        android:background="@color/purple_500"
+        android:src="@drawable/ic_gallery_24"
+        app:layout_constraintLeft_toRightOf="@id/pdf_btn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/text_btn"
+        android:src="@drawable/ic_create_24"
+        app:layout_constraintLeft_toRightOf="@id/gallery_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="50dp"
+        android:background="@color/teel"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_pdf"
+        android:icon="@drawable/ic_pdf_24"
+        android:title="Document"
+        android:iconTint="@color/red" />
+
+    <item
+        android:id="@+id/item_image"
+        android:icon="@drawable/ic_gallery_24"
+        android:iconTint="@color/purple_500"
+        android:title="Gallery" />
+
+    <item
+        android:id="@+id/item_text"
+        android:icon="@drawable/ic_create_24"
+        android:title="Text"
+        android:iconTint="@color/teel"/>
+
+</menu>

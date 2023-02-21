@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyScholar</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="sign_in_with_google">Sign in With Google</string>
+    <string name="continue_with_google">Continue With Google</string>
+</resources>
+
+<!--    pdfUpload2-->

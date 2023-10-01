@@ -24,15 +24,18 @@ import com.example.pdfupload2.Models.Post
 import com.example.pdfupload2.Models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+
 
 private const val TAG:String = "ProfileActivity"
 class ProfileActivity : AppCompatActivity() {
@@ -53,6 +56,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        updateDisplayNamePositionInPosts()
 
         profile_image.setOnClickListener {
 
@@ -121,6 +125,72 @@ class ProfileActivity : AppCompatActivity() {
 
 
     }
+
+
+
+
+    fun updateDisplayNamePositionInPosts() {
+        val db = FirebaseFirestore.getInstance()
+        val fieldName = "displayName"
+
+        // Reference to the "posts" collection
+        val postsCollection = db.collection("posts")
+
+        // Query for all documents in the "posts" collection
+        postsCollection
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val batch = db.batch()
+
+                for (document in querySnapshot.documents) {
+                    val postRef = postsCollection.document(document.id)
+
+                    // Get the existing data
+                    val existingData = (document.data ?: mapOf()).toMutableMap()
+
+                    // Check if the "createdBy" field exists and is a map
+                    if (existingData.containsKey("createdBy") && existingData["createdBy"] is Map<*, *>) {
+                        val createdByMap = existingData["createdBy"] as MutableMap<String, Any?>
+
+                        // Check if "displayName" exists within "createdBy"
+                        if (createdByMap.containsKey(fieldName)) {
+                            // Remove the existing "displayName" field
+                            createdByMap.remove(fieldName)
+
+                            // Create a new map with "displayName" as the first field within "createdBy"
+                            val newCreatedBy = mutableMapOf<String, Any?>()
+                            newCreatedBy[fieldName] = document["createdBy.displayName"]
+                            newCreatedBy.putAll(createdByMap)
+
+                            // Update the "createdBy" field within the document
+                            existingData["createdBy"] = newCreatedBy
+
+                            // Set the entire updated document
+                            batch.set(postRef, existingData)
+                        }
+                    }
+                }
+
+                // Commit the batched write operation
+                batch.commit()
+                    .addOnSuccessListener {
+                        // Field moved successfully in all documents
+                        Log.i(TAG, "Successfully moved $fieldName field in all posts")
+                    }
+                    .addOnFailureListener { e ->
+                        // Handle the failure to move the field
+                        Log.e(TAG, "Error moving $fieldName field: ${e.message}")
+                    }
+            }
+            .addOnFailureListener { e ->
+                // Handle the failure to query documents
+                Log.e(TAG, "Error querying documents: ${e.message}")
+            }
+    }
+
+
+
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
@@ -208,6 +278,66 @@ class ProfileActivity : AppCompatActivity() {
                     val map = mapOf("displayName" to name, "cource" to cource,"bio" to bio)
 
                 db.collection("users").document(uid).update(map)
+                    val updatedUser = mUserDao.getUserById(uid).await().toObject(User::class.java)!!
+
+                    val postsCollection = db.collection("posts")
+
+                    try {
+                        val querySnapshot = postsCollection.whereEqualTo("uid", uid)
+                            .get()
+                            .await()
+
+                        val batch = db.batch()
+
+                        for (document in querySnapshot.documents) {
+                            val postRef = postsCollection.document(document.id)
+
+                            // Update the "createdBy" field in the post document
+                            batch.update(postRef, "createdBy", updatedUser)
+                        }
+
+                        withContext(Dispatchers.IO) {
+                            batch.commit().await()
+                        }
+
+                        // Update completed successfully
+                        Log.i(TAG, "Successfully updated createdBy in all posts")
+                    } catch (e: Exception) {
+                        // Handle exceptions here
+                        Log.e(TAG, "Error updating createdBy in posts: ${e.message}")
+                    }
+
+
+
+
+
+//                    val postsCollection = db.collection("posts")
+//
+//                    try {
+//                        val querySnapshot = withContext(Dispatchers.IO) {
+//                            postsCollection.whereEqualTo("uid", uid)
+//                                .get()
+//                                .await()
+//                        }
+//
+//                        val batch = db.batch()
+//
+//                        for (document in querySnapshot.documents) {
+//                            val postRef = postsCollection.document(document.id)
+//                            batch.update(postRef, map)
+//                        }
+//
+//                        withContext(Dispatchers.IO) {
+//                            batch.commit().await()
+//                        }
+//
+//                        // Update completed successfully
+//                        Log.i(TAG, "Successfully updated the posts")
+//                    } catch (e: Exception) {
+//                        // Handle exceptions here
+//                        Log.e(TAG, "Error updating posts: ${e.message}")
+//                    }
+
                dialog.dismiss()
 
 
@@ -220,7 +350,6 @@ class ProfileActivity : AppCompatActivity() {
 
                 }
 
-
             }
         }
 
@@ -228,6 +357,8 @@ class ProfileActivity : AppCompatActivity() {
 
 
     }
+
+
 
     private fun upDateUi(user:User) {
 

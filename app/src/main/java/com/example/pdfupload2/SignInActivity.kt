@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.example.pdfupload2.Daos.UserDao
 import com.example.pdfupload2.Models.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -120,6 +121,7 @@ class SignInActivity : AppCompatActivity() {
 
         progressBar.visibility = View.GONE
         signInButton.visibility =  View.VISIBLE
+        Toast.makeText(this,"check internet connection",Toast.LENGTH_LONG).show()
     }
 
   }

@@ -158,7 +158,9 @@ class PostAdapter(val context:Context,options: FirestoreRecyclerOptions<Post>, p
 
     override fun getItemViewType(position: Int): Int {
 //        return super.getItemViewType(position)
+
     if(getItem(position).post_type == 0L){
+
 //        Log.e(TAG,"item post is ${getItem(position).post_title}")
         return post_type_text
     }else if(getItem(position).post_type == 1L)
@@ -186,17 +188,18 @@ class PdfViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val mMenus:ImageView = itemView.findViewById(R.id.popup_menu)
     fun bind(model: Post,listener: OnItemClicked){
 
-        GlobalScope.launch {
+//        GlobalScope.launch {
+//
+//            val userDao = UserDao()
+//            val user = userDao.getUserById(model.uid).await().toObject(User::class.java)!!
+//            withContext(Main) {
+//                pdfUserName.text =user.displayName
+//                Glide.with(pdfUserImage.context).load(user.imageUrl).circleCrop().into(pdfUserImage)
+//            }
+//        }
 
-            val userDao = UserDao()
-            val user = userDao.getUserById(model.uid).await().toObject(User::class.java)!!
-            withContext(Main) {
-                pdfUserName.text =user.displayName
-                Glide.with(pdfUserImage.context).load(user.imageUrl).circleCrop().into(pdfUserImage)
-            }
-        }
-
-
+        pdfUserName.text =model.createdBy.displayName
+        Glide.with(pdfUserImage.context).load(model.createdBy.imageUrl).circleCrop().into(pdfUserImage)
         pdfPostTitle.text = model.post_title
 
         pdfLikeCount.text = model.likedBy.size.toString()
@@ -251,16 +254,19 @@ class TextViewHolder(val context:Context,itemView: View):RecyclerView.ViewHolder
 
     fun bind(model:Post,listener: OnItemClicked) {
 
-        GlobalScope.launch {
+//        GlobalScope.launch {
+//
+//            val userDao = UserDao()
+//            val user = userDao.getUserById(model.uid).await().toObject(User::class.java)!!
+//            withContext(Main) {
+//                userName.text = user.displayName
+//                Glide.with(userImage.context).load(user.imageUrl).circleCrop().into(userImage)
+//
+//            }
+//        }
 
-            val userDao = UserDao()
-            val user = userDao.getUserById(model.uid).await().toObject(User::class.java)!!
-            withContext(Main) {
-                userName.text = user.displayName
-                Glide.with(userImage.context).load(user.imageUrl).circleCrop().into(userImage)
-
-            }
-        }
+        userName.text = model.createdBy.displayName
+        Glide.with(userImage.context).load(model.createdBy.imageUrl).circleCrop().into(userImage)
 
 
         postTitle.text = model.post_title
@@ -311,7 +317,7 @@ class TextViewHolder(val context:Context,itemView: View):RecyclerView.ViewHolder
 class ImageViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
 
     private val imageUserImage:ImageView = itemView.findViewById(R.id.userImage)
-            val imageUserName :TextView = itemView.findViewById(R.id.userName)
+    private val imageUserName :TextView = itemView.findViewById(R.id.userName)
     private val imageCreatedAt:TextView = itemView.findViewById(R.id.createdAt)
     private val imagePostTitle:TextView = itemView.findViewById(R.id.postTitle)
     val imageLikeButton:ImageView = itemView.findViewById(R.id.likeButton)
@@ -322,16 +328,18 @@ class ImageViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
     fun bind(model : Post,listener: OnItemClicked){
 
 
-        GlobalScope.launch {
-
-            val userDao = UserDao()
-            val user = userDao.getUserById(model.uid).await().toObject(User::class.java)!!
-            withContext(Main) {
-                imageUserName.text = user.displayName
-                Glide.with(imageUserImage.context).load(user.imageUrl).circleCrop().into(imageUserImage)
-
-            }
-        }
+//        GlobalScope.launch {
+//
+//            val userDao = UserDao()
+//            val user = userDao.getUserById(model.uid).await().toObject(User::class.java)!!
+//            withContext(Main) {
+//                imageUserName.text = user.displayName
+//                Glide.with(imageUserImage.context).load(user.imageUrl).circleCrop().into(imageUserImage)
+//
+//            }
+//        }
+        imageUserName.text = model.createdBy.displayName
+        Glide.with(imageUserImage.context).load(model.createdBy.imageUrl).circleCrop().into(imageUserImage)
 
 
         imagePostTitle.text = model.post_title

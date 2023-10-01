@@ -46,6 +46,7 @@ class Profilepic : AppCompatActivity() {
         mUserDao = UserDao()
 
         GlobalScope.launch {
+
           val  signinUser = mUserDao.getUserById(uid).await().toObject(User::class.java)!!
             withContext(Main){
                 prevUrl = signinUser.imageUrl
@@ -150,7 +151,7 @@ class Profilepic : AppCompatActivity() {
 
                 if (postCompleteTask.isSuccessful == false) {
 
-                    Log.e(TAG, "exception during post")
+                    Log.e(TAG, "exception during post ${postCompleteTask.exception}")
                     Toast.makeText(this, "check your internet connection..", Toast.LENGTH_LONG)
                         .show()
                     done_btn.isEnabled = true

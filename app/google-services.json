@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1020378472322:android:9c8cd714bed9ecc329b99b",
+        "android_client_info": {
+          "package_name": "com.example.loginregistration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1020378472322-7l925vm3g9j7eufiglogvjtheock9pol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8XFwAW7ayMz0JeEh-5W6WsFtntCGH3EM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1020378472322-7l925vm3g9j7eufiglogvjtheock9pol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1020378472322:android:b74b83917b3384c529b99b",
         "android_client_info": {
           "package_name": "com.example.pdfupload2"
@@ -14,7 +43,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "1020378472322-jagpvb4f82ejqv5a81a4jkn560nhnmup.apps.googleusercontent.com",
+          "client_id": "1020378472322-ps7vafbb2ffek83nqns5m8lltiae18bq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.pdfupload2",

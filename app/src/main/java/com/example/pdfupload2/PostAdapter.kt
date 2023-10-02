@@ -3,8 +3,6 @@ package com.example.pdfupload2
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
-import android.media.Image
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,23 +11,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.pdfupload2.Daos.UserDao
 import com.example.pdfupload2.Models.Post
-import com.example.pdfupload2.Models.User
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 
@@ -37,6 +27,7 @@ const val post_type_text = 0
 const val post_type_pdf = 1
 const val post_type_image = 2
 private const val TAG = "PostAdapter"
+private var like = false
 class PostAdapter(val context:Context,options: FirestoreRecyclerOptions<Post>, private val listener:OnItemClicked):FirestoreRecyclerAdapter<Post,RecyclerView.ViewHolder>(
     options
 ) {
@@ -90,9 +81,10 @@ class PostAdapter(val context:Context,options: FirestoreRecyclerOptions<Post>, p
             val holder = TextViewHolder(context ,view)
 
             holder.mMenus.setOnClickListener { Deletepost(it,holder) }
-
+//
             holder.likeButton.setOnClickListener{
 
+                handleLikes(holder.isLike,holder.likeButton,holder.likeCount)
                 listener.onLikeClicked(snapshots.getSnapshot(holder.adapterPosition).id)
             }
 
@@ -108,7 +100,7 @@ class PostAdapter(val context:Context,options: FirestoreRecyclerOptions<Post>, p
             holder.mMenus.setOnClickListener { Deletepost(it,holder) }
 
             holder.pdfLikeButton.setOnClickListener {
-
+                handleLikes(holder.isLike,holder.pdfLikeButton,holder.pdfLikeCount)
                 listener.onLikeClicked(snapshots.getSnapshot(holder.adapterPosition).id)
             }
             holder.pdfDownLoad.setOnClickListener {
@@ -127,13 +119,29 @@ class PostAdapter(val context:Context,options: FirestoreRecyclerOptions<Post>, p
 
 
         holder.imageLikeButton.setOnClickListener {
-
+            handleLikes(holder.isLike,holder.imageLikeButton,holder.imageLikeCount)
             listener.onLikeClicked(snapshots.getSnapshot(holder.adapterPosition).id)
         }
 
         return holder
 
     }
+
+    private fun handleLikes(isLike: Boolean, likeButton: ImageView, likeCount: TextView) {
+
+        if (!isLike) {
+
+            likeButton.setImageDrawable(ContextCompat.getDrawable(likeButton.context,R.drawable.ic_like))
+            likeCount.text = ((likeCount.text.toString().toInt() + 1)).toString()
+
+        } else {
+           likeButton.setImageDrawable(ContextCompat.getDrawable(likeButton.context,R.drawable.ic_unlike))
+           likeCount.text = ((likeCount.text.toString().toInt() - 1)).toString()
+
+        }
+
+    }
+
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, model: Post) {
 
@@ -186,6 +194,10 @@ class PdfViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val pdfLikeButton:ImageView = itemView.findViewById(R.id.likeButton)
     val pdfLikeCount:TextView = itemView.findViewById(R.id.likeCount)
     val mMenus:ImageView = itemView.findViewById(R.id.popup_menu)
+    var isLike = false
+
+
+
     fun bind(model: Post,listener: OnItemClicked){
 
 //        GlobalScope.launch {
@@ -207,7 +219,7 @@ class PdfViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         pdfName.text = model.pdfName
         val auth = Firebase.auth
         val currentUserId = auth.currentUser!!.uid
-        val isLike = model.likedBy.contains(currentUserId)
+        isLike = model.likedBy.contains(currentUserId)
 
         if(isLike){
 
@@ -249,8 +261,9 @@ class TextViewHolder(val context:Context,itemView: View):RecyclerView.ViewHolder
     private val createdAt:TextView = itemView.findViewById(R.id.createdAt)
     private val postTitle:TextView = itemView.findViewById(R.id.postTitle)
     val likeButton:ImageView = itemView.findViewById(R.id.likeButton)
-    private val likeCount:TextView = itemView.findViewById(R.id.likeCount)
+     var likeCount:TextView = itemView.findViewById(R.id.likeCount)
     val mMenus :ImageView = itemView.findViewById(R.id.popup_menu)
+    var isLike = false
 
     fun bind(model:Post,listener: OnItemClicked) {
 
@@ -276,19 +289,32 @@ class TextViewHolder(val context:Context,itemView: View):RecyclerView.ViewHolder
 
         val auth = Firebase.auth
         val currentUserId = auth.currentUser!!.uid
-        val isLike = model.likedBy.contains(currentUserId)
-//            val isLike = false
+        isLike = model.likedBy.contains(currentUserId)
+
         if (isLike) {
 
-            likeButton.setImageDrawable(
-                ContextCompat.getDrawable(
-                    likeButton.context,
-                    R.drawable.ic_like
-                )
-            )
+            likeButton.setImageDrawable(ContextCompat.getDrawable(likeButton.context,R.drawable.ic_like))
         } else {
             likeButton.setImageDrawable(ContextCompat.getDrawable(likeButton.context,R.drawable.ic_unlike))
         }
+
+
+
+
+//        readMore.setOnClickListener {
+//            if (postTitle.maxLines == 2) {
+//                // Expand to show full text
+//                postTitle.maxLines = Integer.MAX_VALUE
+//                readMore.text = "Read Less"
+//            } else {
+//                // Collapse to show two lines
+//                postTitle.maxLines = 2
+//                readMore.text = "Read More"
+//            }
+//        }
+
+//       readMore.visibility = if (postTitle.lineCount > 2) View.VISIBLE else View.GONE
+
 
         val uid = Firebase.auth.currentUser!!.uid
 
@@ -321,9 +347,10 @@ class ImageViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
     private val imageCreatedAt:TextView = itemView.findViewById(R.id.createdAt)
     private val imagePostTitle:TextView = itemView.findViewById(R.id.postTitle)
     val imageLikeButton:ImageView = itemView.findViewById(R.id.likeButton)
-    private val imageLikeCount:TextView = itemView.findViewById(R.id.likeCount)
+     val imageLikeCount:TextView = itemView.findViewById(R.id.likeCount)
      private val imagePost:ImageView = itemView.findViewById(R.id.post_image)
     val mMenus:ImageView = itemView.findViewById(R.id.popup_menu)
+    var isLike = false
 
     fun bind(model : Post,listener: OnItemClicked){
 
@@ -351,7 +378,7 @@ class ImageViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val currentUserId = auth.currentUser!!.uid
 
 
-        val isLike = model.likedBy.contains(currentUserId)
+         isLike = model.likedBy.contains(currentUserId)
 
         if(isLike){
 

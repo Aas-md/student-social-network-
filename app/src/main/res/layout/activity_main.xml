@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/whatsapp_background2"
+    android:background="#E1DFDF"
     tools:context=".MainActivity">
+<!--    android:background="@drawable/whatsapp_background2"-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

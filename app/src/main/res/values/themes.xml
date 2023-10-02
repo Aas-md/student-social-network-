@@ -13,6 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="MyToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@drawable/gradiant_blue</item>
+        <!-- ... other toolbar attributes ... -->
+    </style>
 <!--    "Theme.MaterialComponents.DayNight.NoActionBar"-->
     <style name="Theme.SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->

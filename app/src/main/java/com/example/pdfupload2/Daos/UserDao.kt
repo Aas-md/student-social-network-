@@ -1,5 +1,6 @@
 package com.example.pdfupload2.Daos
 
+import android.util.Log
 import com.example.pdfupload2.Models.User
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.ktx.auth
@@ -16,22 +17,28 @@ class UserDao(){
     private val db = FirebaseFirestore.getInstance()
     private val usersCollection = db.collection("users")
 
+
+
+
     fun addUser(user: User?){
 
+        if (user != null) {
+            GlobalScope.launch(Dispatchers.IO) {
+                val userDocument = usersCollection.document(user.uId)
 
-        val metadata = auth.currentUser!!.metadata
-        if (metadata!!.creationTimestamp == metadata!!.lastSignInTimestamp) {
-            // The user is new, show them a fancy intro screen!
+                userDocument.get().addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                     // do not need to add user again in the collection already exist
+                    } else {
+                        // User document does not exist, create a new one
+                        userDocument.set(user)
+                    }
+                }.addOnFailureListener { e ->
+                    // Handle failures, such as network errors or permission issues
 
-            if(user != null)
-            {
-
-                GlobalScope.launch(Dispatchers.IO) {
-
-                    usersCollection.document(user.uId).set(user)
+                    Log.e("TAG", "Error checking user document existence", e)
                 }
             }
-
         }
 
 
